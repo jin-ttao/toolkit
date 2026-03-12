@@ -5,7 +5,14 @@ Read all Chrome tabs, classify them, discuss context with the user, then close/s
 ## Procedure
 
 ### Step 1: Collect tabs
-Run via Bash:
+
+**Pre-check: Is Chrome running?**
+```
+osascript -e 'application "Google Chrome" is running'
+```
+If `false` → tell the user: "Chrome is not running. Please open Chrome first." and **stop**.
+
+**Collect all tabs:**
 ```
 osascript -e '
 tell application "Google Chrome"
@@ -22,7 +29,11 @@ tell application "Google Chrome"
   return output
 end tell'
 ```
-Parse into `{window, index, title, url}` list. Note which window has the most tabs (that's the main browser window to clean).
+Parse into `{window, index, title, url}` list.
+
+If total tab count is 0 → tell the user: "No tabs found. Nothing to clean." and **stop**.
+
+**Pinned tabs:** After collecting, ask the user: "How many of your leftmost tabs are pinned?" Mark those as auto-KEEP. If the user says "none", skip this.
 
 ### Step 2: Auto-classify
 
@@ -63,6 +74,14 @@ Google search tabs (`google.com/search`) are CLOSE'd, but **extract the search q
 
 ### Step 3: Context conversation
 
+#### Large tab sets (30+ non-KEEP tabs)
+If there are more than 30 non-KEEP tabs:
+- Group by domain only (not topic) for efficiency
+- Show summary first: "{N} non-KEEP tabs across {M} domains"
+- Ask: "Want to review all groups, or only groups with 3+ tabs?"
+- Single-tab groups without clear intent → auto-suggest CLOSE
+
+#### Grouping
 Group non-KEEP tabs by similar URL/domain/topic. **Ask per group, NOT per tab.**
 
 For each group, ask the user:
