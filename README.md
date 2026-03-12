@@ -10,10 +10,14 @@ A collection of [Claude Code](https://docs.anthropic.com/en/docs/claude-code) sk
 
 ## Install
 
-Copy any skill's `.md` file to `.claude/commands/` in your project:
-
+**Option A: Skills CLI (recommended)**
 ```bash
-cp skills/tab-clean/tab-clean.md .claude/commands/tab-clean.md
+npx skills add jin-ttao/toolkit --skill tab-clean
+```
+
+**Option B: Manual copy**
+```bash
+cp skills/tab-clean/SKILL.md .claude/commands/tab-clean.md
 ```
 
 Then run in Claude Code: `/tab-clean`

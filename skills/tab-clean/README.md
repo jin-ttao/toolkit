@@ -45,9 +45,14 @@ Saved file (`tabs-2026-03-11.md`):
 
 ## Install
 
+**Option A: Skills CLI (recommended)**
 ```bash
-# Copy the skill file to your project
-cp tab-clean.md .claude/commands/tab-clean.md
+npx skills add jin-ttao/toolkit --skill tab-clean
+```
+
+**Option B: Manual copy**
+```bash
+cp SKILL.md .claude/commands/tab-clean.md
 ```
 
 Then run in Claude Code:

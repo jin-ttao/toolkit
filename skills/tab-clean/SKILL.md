@@ -1,3 +1,8 @@
+---
+name: tab-clean
+description: AI-powered Chrome tab cleanup — classifies tabs as KEEP/SAVE/CLOSE, extracts interest signals from searches, and discusses context before closing.
+---
+
 # /tab-clean - Chrome Tab Cleanup
 
 Read all Chrome tabs, classify them, discuss context with the user, then close/save as confirmed.
